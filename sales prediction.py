@@ -1,0 +1,47 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+
+n = int(input("Enter number of training records: "))
+
+x1 = []
+x2 = []
+x3 = []
+y = []
+
+for i in range(n):
+    print(f"\nEnter details for Record {i+1}")
+    
+    a = float(input("Enter first value: "))
+    b = float(input("Enter second value: "))
+    c = float(input("Enter third value: "))
+    d = float(input("Enter output value: "))
+    
+    x1.append(a)
+    x2.append(b)
+    x3.append(c)
+    y.append(d)
+
+data = pd.DataFrame({
+    'x1': x1,
+    'x2': x2,
+    'x3': x3,
+    'y': y
+})
+
+X = data[['x1', 'x2', 'x3']]
+Y = data['y']
+
+model = LinearRegression()
+model.fit(X, Y)
+
+print("\nEnter values for prediction")
+
+p1 = float(input("Enter first value: "))
+p2 = float(input("Enter second value: "))
+p3 = float(input("Enter third value: "))
+
+prediction = model.predict([[p1, p2, p3]])
+
+# Display result
+print("\nPredicted Value:", round(prediction[0], 2))
